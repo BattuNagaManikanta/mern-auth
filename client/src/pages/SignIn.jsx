@@ -11,7 +11,7 @@ export default function SignIn() {
   const navigate=useNavigate();
   const dispatch=useDispatch();
 
-  console.log(error);
+  console.log(loading);
   const handleChange=(e)=>{
     setFormdata({...formdata,[e.target.id]:e.target.value})
   }
@@ -21,6 +21,7 @@ export default function SignIn() {
     e.preventDefault();
     try{
       dispatch(signInStart())
+     
       const res=await fetch("http://localhost:3000/api/auth/signin",{
       method:'POST',
       headers:{
@@ -34,6 +35,7 @@ export default function SignIn() {
       dispatch(signInFailure(data))
       return;
     }
+    console.log(loading)
     dispatch(signInSuccess(data))
     navigate("/")
   }
