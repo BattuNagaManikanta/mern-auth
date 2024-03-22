@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
+import Gbutton from '../components/Gbutton';
 export default function SignUp() {
 
   const [formdata,setFormdata]=useState({});
@@ -48,6 +49,7 @@ export default function SignUp() {
       <input onChange={handleChange} type='text' placeholder='email' id='email'className='bg-slate-100 p-3 rounded-lg'/> 
       <input onChange={handleChange} type='text' placeholder='password' id='password'className='bg-slate-100 p-3 rounded-lg'/>
       <button disabled={loading} className='bg-slate-700 p-3 text-white rounded-lg hover:opacity-95 uppercase disabled:opacity-80'>{loading?'loading ..':'SIGNUP'}</button> 
+      <Gbutton/>
       <div className='flex gap-3'>
         <p>Have an Account?</p>
         <Link to='/sign-in'>
