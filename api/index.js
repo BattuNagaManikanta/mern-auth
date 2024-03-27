@@ -16,10 +16,10 @@ mongoose.connect(process.env.MONGO).then(()=>{
 )
 
 const app=express();
-app.use(cors())
 
 app.use(express.json())
 app.use(cookieParser())
+
 
 app.listen(3000,()=>{
     console.log("server listening on port 3000!")
