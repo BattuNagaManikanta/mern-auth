@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { app } from '../Firebase';
 import {getStorage,ref, uploadBytesResumable,getDownloadURL} from 'firebase/storage'
 import { 
-  updateUserStart, updateUserFailure,updateUserSuccess,deleteUserStart,deleteUserSuccess,deleteUserFailure }
+  updateUserStart, updateUserFailure,updateUserSuccess,deleteUserStart,deleteUserSuccess,deleteUserFailure, signout }
   from '../redux/user/userSlice';
 
 
@@ -96,7 +96,19 @@ export default function Profile() {
     }
   }
   
-  console.log(formData);
+  const handleSignout=async ()=>{
+    try{
+      await fetch('/api/auth/signout')
+      dispatch(signout())
+    }
+    catch(error){
+      console.log(error);
+    }
+    
+
+  }
+
+  // console.log(formData);
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center my-7'>Profile</h1>
@@ -125,7 +137,7 @@ export default function Profile() {
         <span onClick={handleDeleteUser} className='text-red-600 cursor-pointer'>
           Delete Account
         </span>
-        <span className='text-red-600 cursor-pointer'>
+        <span onClick={handleSignout} className='text-red-600 cursor-pointer'>
           Signout
         </span>
       </div>
