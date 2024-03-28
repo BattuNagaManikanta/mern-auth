@@ -13,6 +13,7 @@ export default function Profile() {
   const [imagePercent,setImagePercent]=useState(0)
   const [imageError,setImageError]=useState(false)
   const [formData,setFormData]=useState({});
+  const [updateSuccess,setUpdateSuccess]=useState(false)
   const {currentUser,loading,error}=useSelector((state)=>state.user);
   console.log(imagePercent);
   console.log(image);
@@ -67,6 +68,7 @@ export default function Profile() {
         return;
       }    
       dispatch(updateUserSuccess(data))
+      setUpdateSuccess(true)
       }
     catch(error){
       dispatch(updateUserFailure(error))      
@@ -97,7 +99,7 @@ export default function Profile() {
         <input defaultValue={currentUser.username}type="text" id="username" placeholder='Username' className='bg-slate-100 rounded-lg p-3' onChange={handleChange}></input>
         <input defaultValue={currentUser.email} type="text" id="email" placeholder='Email' className='bg-slate-100 rounded-lg p-3' onChange={handleChange}></input>
         <input type="password" id="password" onChange={handleChange} placeholder='Password' className='bg-slate-100 rounded-lg p-3'></input>
-        <button className='bg-slate-700 p-3 text-white rounded-lg hover:opacity-95 disabled:opacity-85 '>update</button>
+        <button className='bg-slate-700 p-3 text-white rounded-lg hover:opacity-95 disabled:opacity-85 '>{loading? "loading ... " : "Update"}</button>
       </form>
       <div className='flex justify-between mt-5'>
         <span className='text-red-600 cursor-pointer'>
@@ -107,6 +109,8 @@ export default function Profile() {
           Signout
         </span>
       </div>
+      <p className='text-red-700 mt-5'>{error && "something went wrong"}</p>
+      <p className='text-green-600 mt-5'>{updateSuccess && "User Updated successfully"}</p>
     </div>
     
   )
